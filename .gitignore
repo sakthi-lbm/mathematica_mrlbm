@@ -1,4 +1,4 @@
-*.nb
+test*
 *.o
 *.json
 *.lastcodeanalysissucceeded
