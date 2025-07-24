@@ -1,0 +1,3192 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    128385,       3184]
+NotebookOptionsPosition[    121699,       3101]
+NotebookOutlinePosition[    122063,       3117]
+CellTagsIndexPosition[    122020,       3114]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"notebookDir", "=", 
+   RowBox[{"NotebookDirectory", "[", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetDirectory", "[", "notebookDir", "]"}], ";"}], "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Get", "[", "\"\<source_files/NotationDefinitions.wl\>\"", "]"}], 
+    ";"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/lattice_properties_d2q9.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/BoundaryDefinitions.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Get", "[", "\"\<source_files/print_bc_results.wl\>\"", "]"}], 
+   ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "Corners", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "south_west"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"bottom_left", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "0"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<south_west\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "north_west"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"top_left", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "uo"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<north_west\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"--", 
+                 RowBox[{"-", "south_east"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+     RowBox[{"(", "or", ")"}], " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"bottom_right", "--"}], "--"}], "--"}], "--"}], 
+             "--"}], "--"}], "--"}], "--"}], "--"}], "--"}], "--"}], "--"}]}],
+     "-"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "0"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<south_east\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "north_east"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"top_right", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "uo"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<north_east\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", "Edges", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "WEST"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", "or", " ",
+     "LEFT", " ", 
+    RowBox[{"(", "or", ")"}], " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"INLET", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "0"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<west\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "EAST"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"OUTLET", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "0"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<east\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "NORTH"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", "TOP", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"WALL", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ux", "=", "uo"}], ";", " ", 
+   RowBox[{"uy", "=", "0"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<north\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", 
+            RowBox[{"--", 
+             RowBox[{"--", 
+              RowBox[{"--", 
+               RowBox[{"--", 
+                RowBox[{"-", "SOUTH"}]}]}]}]}]}]}]}]}]}]}]}]}], " ", 
+    RowBox[{"(", "or", ")"}], " ", "BOTTOM", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"WALL", "--"}], "--"}], "--"}], "--"}], 
+    RowBox[{"--", 
+     RowBox[{"--", 
+      RowBox[{"--", 
+       RowBox[{"--", 
+        RowBox[{"--", 
+         RowBox[{"--", 
+          RowBox[{"--", 
+           RowBox[{"--", "-"}]}]}]}]}]}]}]}]}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"ux", ",", "uy"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ux", "=", "0"}], ";", " ", 
+  RowBox[{"uy", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetBoundary", "[", "\"\<south\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Get", "[", "\"\<source_files/equations_2d.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\<source_files/equations_incoming_calc.wl\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sol1", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqrhoS", ",", "eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Rho]", ",", "mxx", ",", "myy", ",", "mxy"}], "}"}]}], 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol2", "=", 
+   RowBox[{"Solve", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eqmxx", ",", "eqmyy", ",", "eqmxy"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"mxx", ",", "myy", ",", "mxy"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PrintBoundaryResults", "[", "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.961684759549836*^9, 3.961684849230995*^9}, {
+   3.9616849848354273`*^9, 3.961684985206215*^9}, 3.961685028893174*^9, {
+   3.961685129401661*^9, 3.961685176477973*^9}, {3.961685247943832*^9, 
+   3.9616852978337717`*^9}, {3.961685337403615*^9, 3.961685426816079*^9}, 
+   3.961685748394665*^9, {3.961685832398694*^9, 3.961685953083886*^9}, {
+   3.961686005539604*^9, 3.9616860547369833`*^9}, {3.961686189361143*^9, 
+   3.961686243723299*^9}, {3.961686519658485*^9, 3.961686630716988*^9}, {
+   3.961686667811569*^9, 3.9616866733531437`*^9}, {3.961686703982011*^9, 
+   3.961686754902137*^9}, {3.9616868149146338`*^9, 3.9616868210083647`*^9}, {
+   3.961686938178904*^9, 3.9616870456869087`*^9}, {3.961687088417705*^9, 
+   3.961687091596727*^9}, {3.961687149515511*^9, 3.961687155293661*^9}, {
+   3.9616873776717443`*^9, 3.9616874366589108`*^9}, {3.961687492776123*^9, 
+   3.961687525155611*^9}, {3.961687614894825*^9, 3.9616876152274446`*^9}, {
+   3.961687655323235*^9, 3.9616879545807133`*^9}, {3.961687992489623*^9, 
+   3.961687992856056*^9}, {3.961688044840769*^9, 3.9616881831433487`*^9}, {
+   3.961688224305794*^9, 3.9616882579502897`*^9}, {3.961688291143114*^9, 
+   3.9616883764909487`*^9}, {3.961688735427731*^9, 3.9616887423444023`*^9}, {
+   3.961689857630618*^9, 3.9616899069254217`*^9}, {3.961690058233477*^9, 
+   3.961690133364738*^9}, {3.961690172545713*^9, 3.961690189331606*^9}, {
+   3.9616922190288982`*^9, 3.961692262057231*^9}, {3.961692304403925*^9, 
+   3.961692308592545*^9}, {3.961692443718755*^9, 3.961692480106594*^9}, {
+   3.961745629811908*^9, 3.961745642701744*^9}, {3.961745690079875*^9, 
+   3.961745697966281*^9}, {3.961745761493615*^9, 3.961745776285636*^9}, {
+   3.961746002044797*^9, 3.961746005963606*^9}, {3.961746091226863*^9, 
+   3.961746106342732*^9}, {3.9617695777151527`*^9, 3.961769640995648*^9}, {
+   3.9617696920261183`*^9, 3.9617697022848873`*^9}, {3.962355476762207*^9, 
+   3.96235553317104*^9}, {3.962356160525366*^9, 3.9623561619637833`*^9}, {
+   3.9623562549327917`*^9, 3.9623562758315496`*^9}, 3.962356600249997*^9, {
+   3.9623582361942244`*^9, 3.9623582364696617`*^9}, {3.962358267893916*^9, 
+   3.9623582733974247`*^9}, {3.9623633010144377`*^9, 3.962363317003289*^9}, {
+   3.962363357750307*^9, 3.962363358163321*^9}, {3.962363877457225*^9, 
+   3.962363903368663*^9}, {3.9623639551223497`*^9, 3.962364174950439*^9}, {
+   3.962364246925412*^9, 3.96236430237085*^9}, {3.962364435875519*^9, 
+   3.962364459630002*^9}, {3.9623645085943336`*^9, 3.962364526760211*^9}, {
+   3.962364828364253*^9, 3.962364829759759*^9}, 3.962364880480021*^9, {
+   3.9623649745618362`*^9, 3.962365008722048*^9}},
+ CellLabel->
+  "In[221]:=",ExpressionUUID->"f8165cde-f27e-4cf6-8450-44755db2d1d2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"south_west\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["south_west", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027298717`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"9efc7947-5bf7-436f-8279-86f87aed87f0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3", ",", "4", ",", "7"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "5"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 3, 4, 7}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 2, 5}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027334547`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"20fb575d-bfb8-4e65-94af-68ad41bb9eba"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[3] + $CellContext`pop[
+     4] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202739171*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"3a7db09e-f303-46a8-be97-6e61933b7935"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202740891*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"2044c589-d35b-45f4-894f-b93d6e14c39c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[3] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202742547*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"552cc9d6-5367-4980-aee0-1ed4d4c7fffb"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[4] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202744691*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"03757acd-6bb6-42db-9a76-375a2e6a0649"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"pop", "[", "7", "]"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[
+    $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027468557`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"5eb18a52-f3f3-4cd8-b803-32d080caadb7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"12", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "3"}], "-", 
+         RowBox[{"3", " ", "myyI"}], "+", 
+         RowBox[{"3", " ", "mxxI", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "-", 
+         RowBox[{"7", " ", "mxyI", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+         RowBox[{"3", " ", "myyI", " ", "omega"}]}], ")"}], " ", "rhoI"}], 
+      RowBox[{"16", "+", 
+       RowBox[{"9", " ", "omega"}]}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\t\"\>", "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"9", " ", "mxxI", " ", "rhoI"}], "-", 
+        RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "+", "\[Rho]"}], ")"}]}], 
+     RowBox[{"9", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "-", 
+         RowBox[{"9", " ", "myyI", " ", "rhoI"}], "-", "\[Rho]"}], ")"}]}], 
+      RowBox[{"9", " ", "\[Rho]"}]]}]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"18", " ", "mxxI", " ", "rhoI"}], "-", 
+       RowBox[{"132", " ", "mxyI", " ", "rhoI"}], "+", 
+       RowBox[{"18", " ", "myyI", " ", "rhoI"}], "+", 
+       RowBox[{"7", " ", "\[Rho]"}]}], 
+      RowBox[{"27", " ", "\[Rho]"}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> (-12) (16 + 
+      9 $CellContext`omega)^(-1) (-3 - 3 $CellContext`myyI + 
+     3 $CellContext`mxxI (-1 + $CellContext`omega) - 
+     7 $CellContext`mxyI (-1 + $CellContext`omega) + 
+     3 $CellContext`myyI $CellContext`omega) $CellContext`rhoI, 
+   ";\t", $CellContext`mxx -> 
+   Rational[2, 9] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`mxxI $CellContext`rhoI - 
+     6 $CellContext`mxyI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`myy -> 
+   Rational[-2, 9] (6 $CellContext`mxyI $CellContext`rhoI - 
+     9 $CellContext`myyI $CellContext`rhoI - \
+$CellContext`\[Rho])/$CellContext`\[Rho], ";\t", $CellContext`mxy -> 
+   Rational[-1, 27] $CellContext`\[Rho]^(-1) (
+     18 $CellContext`mxxI $CellContext`rhoI - 
+     132 $CellContext`mxyI $CellContext`rhoI + 
+     18 $CellContext`myyI $CellContext`rhoI + 7 $CellContext`\[Rho]), ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027494507`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"b50e13cc-05b4-4478-a8a6-10484e1bfe14"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"north_west\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["north_west", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.96236520277486*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"515965d1-3316-48a3-bdcb-16bfe9a5f0cc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["uo", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "2", ",", "3", ",", "6"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "4", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[$CellContext`uo, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 2, 3, 6}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 4, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202776278*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"b7aa4232-7a87-4e13-9ea3-96d7a2fd4428"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[2] + $CellContext`pop[
+     3] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202781171*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"eba77481-e3dc-47f5-8ac4-b15e27ff835b"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202782658*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"40aceaad-8bda-4dd6-a29a-bab74576a2b8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[3] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202784135*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"bf351fcf-b21b-4920-96da-9ecb009bc7f0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[2] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027862883`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"ea0b0a3e-a400-4831-a440-c0c2efd5cc9e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"-", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[-$CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027881947`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"cd5da1dc-5188-488c-9fbc-ef15172df28e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    FractionBox[
+     RowBox[{"12", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "3"}], "-", 
+        RowBox[{"3", " ", "myyI"}], "+", 
+        RowBox[{"3", " ", "mxxI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+        RowBox[{"7", " ", "mxyI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+        RowBox[{"3", " ", "myyI", " ", "omega"}]}], ")"}], " ", "rhoI"}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"8", "+", 
+         RowBox[{"7", " ", "uo"}]}], ")"}]}], "+", 
+      RowBox[{"omega", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "9"}], "-", "uo", "+", 
+         RowBox[{"15", " ", 
+          SuperscriptBox["uo", "2"]}]}], ")"}]}]}]]}], 
+   "\[InvisibleSpace]", "\<\";\\t\"\>", "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"9", " ", "mxxI", " ", "rhoI"}], "+", 
+        RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "+", "\[Rho]", "+", 
+        RowBox[{"2", " ", "uo", " ", "\[Rho]"}]}], ")"}]}], 
+     RowBox[{"9", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "6"}], " ", "mxyI", " ", "rhoI"}], "-", 
+         RowBox[{"9", " ", "myyI", " ", "rhoI"}], "-", "\[Rho]", "+", 
+         RowBox[{"uo", " ", "\[Rho]"}]}], ")"}]}], 
+      RowBox[{"9", " ", "\[Rho]"}]]}]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "18"}], " ", "mxxI", " ", "rhoI"}], "-", 
+       RowBox[{"132", " ", "mxyI", " ", "rhoI"}], "-", 
+       RowBox[{"18", " ", "myyI", " ", "rhoI"}], "-", 
+       RowBox[{"7", " ", "\[Rho]"}], "+", 
+       RowBox[{"7", " ", "uo", " ", "\[Rho]"}]}], 
+      RowBox[{"27", " ", "\[Rho]"}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   12 (-3 - 3 $CellContext`myyI + 
+     3 $CellContext`mxxI (-1 + $CellContext`omega) + 
+     7 $CellContext`mxyI (-1 + $CellContext`omega) + 
+     3 $CellContext`myyI $CellContext`omega) $CellContext`rhoI/((-2) (8 + 
+      7 $CellContext`uo) + $CellContext`omega (-9 - $CellContext`uo + 
+      15 $CellContext`uo^2)), ";\t", $CellContext`mxx -> 
+   Rational[2, 9] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`mxxI $CellContext`rhoI + 
+     6 $CellContext`mxyI $CellContext`rhoI + $CellContext`\[Rho] + 
+     2 $CellContext`uo $CellContext`\[Rho]), ";\t", $CellContext`myy -> 
+   Rational[-2, 
+      9] $CellContext`\[Rho]^(-1) ((-6) $CellContext`mxyI $CellContext`rhoI - 
+     9 $CellContext`myyI $CellContext`rhoI - $CellContext`\[Rho] + \
+$CellContext`uo $CellContext`\[Rho]), ";\t", $CellContext`mxy -> 
+   Rational[-1, 
+      27] $CellContext`\[Rho]^(-1) ((-18) $CellContext`mxxI $CellContext`rhoI - 
+     132 $CellContext`mxyI $CellContext`rhoI - 
+     18 $CellContext`myyI $CellContext`rhoI - 7 $CellContext`\[Rho] + 
+     7 $CellContext`uo $CellContext`\[Rho]), ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652027896147`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"bf592945-68a0-4290-b201-386f8004957f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"south_east\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["south_east", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202790934*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"097fa9f8-8868-4cbd-91ef-317b41891b97"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "4", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "2", ",", "3", ",", "6"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 1, 4, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 2, 3, 6}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.96236520279208*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"b360f01f-dc47-43e7-b538-dbba7c930b3d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[1] + $CellContext`pop[
+     4] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.96236520279478*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"d8621c15-83ca-4339-82bf-4573f0d237ee"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202795685*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"bc847e7e-e3f9-4e25-bedd-421ffcf3cd1c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[1] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202796558*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"dc790c27-1d8f-4ed4-b97d-6a18d16cf6d4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[4] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202797583*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"6c89091e-bfb7-4721-aacc-2000b39bc093"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"-", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[-$CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202798617*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"8dc94562-257a-46d2-81f4-569661d3ee69"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"12", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "3"}], "-", 
+         RowBox[{"3", " ", "myyI"}], "+", 
+         RowBox[{"3", " ", "mxxI", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+         RowBox[{"7", " ", "mxyI", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+         RowBox[{"3", " ", "myyI", " ", "omega"}]}], ")"}], " ", "rhoI"}], 
+      RowBox[{"16", "+", 
+       RowBox[{"9", " ", "omega"}]}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\t\"\>", "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"9", " ", "mxxI", " ", "rhoI"}], "+", 
+        RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "+", "\[Rho]"}], ")"}]}], 
+     RowBox[{"9", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "+", 
+        RowBox[{"9", " ", "myyI", " ", "rhoI"}], "+", "\[Rho]"}], ")"}]}], 
+     RowBox[{"9", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "18"}], " ", "mxxI", " ", "rhoI"}], "-", 
+       RowBox[{"132", " ", "mxyI", " ", "rhoI"}], "-", 
+       RowBox[{"18", " ", "myyI", " ", "rhoI"}], "-", 
+       RowBox[{"7", " ", "\[Rho]"}]}], 
+      RowBox[{"27", " ", "\[Rho]"}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> (-12) (16 + 
+      9 $CellContext`omega)^(-1) (-3 - 3 $CellContext`myyI + 
+     3 $CellContext`mxxI (-1 + $CellContext`omega) + 
+     7 $CellContext`mxyI (-1 + $CellContext`omega) + 
+     3 $CellContext`myyI $CellContext`omega) $CellContext`rhoI, 
+   ";\t", $CellContext`mxx -> 
+   Rational[2, 9] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`mxxI $CellContext`rhoI + 
+     6 $CellContext`mxyI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`myy -> 
+   Rational[2, 9] $CellContext`\[Rho]^(-1) (
+     6 $CellContext`mxyI $CellContext`rhoI + 
+     9 $CellContext`myyI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`mxy -> 
+   Rational[-1, 27] ((-18) $CellContext`mxxI $CellContext`rhoI - 
+     132 $CellContext`mxyI $CellContext`rhoI - 
+     18 $CellContext`myyI $CellContext`rhoI - 
+     7 $CellContext`\[Rho])/$CellContext`\[Rho], ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202799962*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"6afb00de-f1fe-4387-9eb3-f02344ad7426"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"north_east\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["north_east", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202815406*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"8ad5cadc-749c-41bd-99e3-57e6007d0188"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["uo", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "5"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "3", ",", "4", ",", "7"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[$CellContext`uo, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 1, 2, 5}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 3, 4, 7}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202816677*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"43516c92-2ba4-467c-a27b-e3eab3e39d8a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[1] + $CellContext`pop[
+     2] + $CellContext`pop[5], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202819229*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"09fa226b-8b21-470f-b5bd-9209649c154e"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202819997*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"21e6396f-5d81-4d00-9e10-c4de281060db"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[1] + $CellContext`pop[5], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028207693`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"9f7d7e61-afa4-4a0e-8486-8573b4c1583c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[2] + $CellContext`pop[5], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202821845*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"adcfbfe2-afbb-4cf9-8a2a-221abe498371"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"pop", "[", "5", "]"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[
+    $CellContext`pop[5], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028229103`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"9cc15c3b-e8e1-40de-9b70-30d4a3418af7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    FractionBox[
+     RowBox[{"12", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "3"}], "-", 
+        RowBox[{"3", " ", "myyI"}], "+", 
+        RowBox[{"3", " ", "mxxI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "-", 
+        RowBox[{"7", " ", "mxyI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}], "+", 
+        RowBox[{"3", " ", "myyI", " ", "omega"}]}], ")"}], " ", "rhoI"}], 
+     RowBox[{
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "8"}], "+", 
+         RowBox[{"7", " ", "uo"}]}], ")"}]}], "+", 
+      RowBox[{"omega", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "9"}], "+", "uo", "+", 
+         RowBox[{"15", " ", 
+          SuperscriptBox["uo", "2"]}]}], ")"}]}]}]]}], 
+   "\[InvisibleSpace]", "\<\";\\t\"\>", "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"-", "9"}], " ", "mxxI", " ", "rhoI"}], "+", 
+         RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "-", "\[Rho]", "+", 
+         RowBox[{"2", " ", "uo", " ", "\[Rho]"}]}], ")"}]}], 
+      RowBox[{"9", " ", "\[Rho]"}]]}]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "6"}], " ", "mxyI", " ", "rhoI"}], "+", 
+        RowBox[{"9", " ", "myyI", " ", "rhoI"}], "+", "\[Rho]", "+", 
+        RowBox[{"uo", " ", "\[Rho]"}]}], ")"}]}], 
+     RowBox[{"9", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    RowBox[{"-", 
+     FractionBox[
+      RowBox[{
+       RowBox[{"18", " ", "mxxI", " ", "rhoI"}], "-", 
+       RowBox[{"132", " ", "mxyI", " ", "rhoI"}], "+", 
+       RowBox[{"18", " ", "myyI", " ", "rhoI"}], "+", 
+       RowBox[{"7", " ", "\[Rho]"}], "+", 
+       RowBox[{"7", " ", "uo", " ", "\[Rho]"}]}], 
+      RowBox[{"27", " ", "\[Rho]"}]]}]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   12 (-3 - 3 $CellContext`myyI + 
+     3 $CellContext`mxxI (-1 + $CellContext`omega) - 
+     7 $CellContext`mxyI (-1 + $CellContext`omega) + 
+     3 $CellContext`myyI $CellContext`omega) $CellContext`rhoI/(
+    2 (-8 + 7 $CellContext`uo) + $CellContext`omega (-9 + $CellContext`uo + 
+      15 $CellContext`uo^2)), ";\t", $CellContext`mxx -> 
+   Rational[-2, 
+      9] $CellContext`\[Rho]^(-1) ((-9) $CellContext`mxxI $CellContext`rhoI + 
+     6 $CellContext`mxyI $CellContext`rhoI - $CellContext`\[Rho] + 
+     2 $CellContext`uo $CellContext`\[Rho]), ";\t", $CellContext`myy -> 
+   Rational[2, 
+      9] $CellContext`\[Rho]^(-1) ((-6) $CellContext`mxyI $CellContext`rhoI + 
+     9 $CellContext`myyI $CellContext`rhoI + $CellContext`\[Rho] + \
+$CellContext`uo $CellContext`\[Rho]), ";\t", $CellContext`mxy -> 
+   Rational[-1, 27] $CellContext`\[Rho]^(-1) (
+     18 $CellContext`mxxI $CellContext`rhoI - 
+     132 $CellContext`mxyI $CellContext`rhoI + 
+     18 $CellContext`myyI $CellContext`rhoI + 7 $CellContext`\[Rho] + 
+     7 $CellContext`uo $CellContext`\[Rho]), ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.96236520282441*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"38759cda-10d6-4cfd-a24f-377d21f97d88"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"west\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["west", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028257933`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"6d2e9cc8-ed8e-4e4f-8c65-7c6ac97974c5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "2", ",", "3", ",", "4", ",", "6", ",", "7"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "4", ",", "5", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 2, 3, 4, 6, 7}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 2, 4, 5, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202826887*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"89fde77f-b182-448a-bb3a-7fee6de3bb49"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[2] + $CellContext`pop[
+     3] + $CellContext`pop[4] + $CellContext`pop[6] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028295517`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"13d03462-2aae-47d8-b1ec-5a6fe79e2e1e"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202830511*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"8bf84376-895e-49ce-802c-36cde3d1bf24"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[3] + $CellContext`pop[6] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028315372`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"00063fa2-e96b-40de-b7a7-d60fb4d06544"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[2] + $CellContext`pop[4] + $CellContext`pop[
+     6] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028326387`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"42aec1a0-3fca-438a-afdf-8248d8931a61"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"-", 
+      RowBox[{"pop", "[", "6", "]"}]}], "+", 
+     RowBox[{"pop", "[", "7", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[-$CellContext`pop[6] + $CellContext`pop[7], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028337097`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"60389737-7913-4edd-bc60-9ba58468c77a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    FractionBox[
+     RowBox[{"3", " ", 
+      RowBox[{"(", 
+       RowBox[{"4", "-", 
+        RowBox[{"3", " ", "mxxI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}]}], ")"}], " ", 
+      "rhoI"}], 
+     RowBox[{"9", "+", "omega"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"9", " ", "mxxI", " ", "rhoI"}], "+", "\[Rho]"}], 
+     RowBox[{"6", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"6", " ", "myyI", " ", "rhoI"}], 
+     RowBox[{"5", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", "mxyI", " ", "rhoI"}], "\[Rho]"]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   3 (4 - 3 $CellContext`mxxI (-1 + $CellContext`omega)) (
+      9 + $CellContext`omega)^(-1) $CellContext`rhoI, ";\t", $CellContext`mxx -> 
+   Rational[1, 6] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`mxxI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`myy -> 
+   Rational[6, 5] $CellContext`myyI $CellContext`rhoI/$CellContext`\[Rho], 
+   ";\t", $CellContext`mxy -> 
+   2 $CellContext`mxyI $CellContext`rhoI/$CellContext`\[Rho], ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028349*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"acf1f15c-eb9c-4de5-96b2-5c8bbee66f4a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"east\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["east", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202836059*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"3bf45d9d-01b5-4695-b157-f89969eb9e0b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "4", ",", "5", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "3", ",", "4", ",", "7", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 1, 2, 4, 5, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 3, 4, 7, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202837206*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"95ccb15c-eeaf-4933-822b-aa0154c70281"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[1] + $CellContext`pop[
+     2] + $CellContext`pop[4] + $CellContext`pop[5] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.96236520283989*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"d5ad28b4-fda1-4b29-acc5-0cca8119b50a"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202840829*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"cd5d4943-bb02-4d2d-8b36-b7041f0ae25a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[1] + $CellContext`pop[5] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028417788`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"dca35717-1dce-4f1d-a511-ebcc725cd5ac"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[2] + $CellContext`pop[4] + $CellContext`pop[
+     5] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202842885*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"47a8cd15-172a-4ff6-91f4-61a31f00c7ae"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "5", "]"}], "-", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[$CellContext`pop[5] - $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202844055*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"df94b814-98cd-498d-a6b1-286fda66eec3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    RowBox[{
+     RowBox[{"-", 
+      FractionBox["6", "25"]}], " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"-", "5"}], "+", 
+       RowBox[{"3", " ", "myyI", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", "omega"}], ")"}]}]}], ")"}], " ", 
+     "rhoI"}]}], "\[InvisibleSpace]", "\<\";\\t\"\>", "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"9", " ", "mxxI", " ", "rhoI"}], "+", "\[Rho]"}], 
+     RowBox[{"6", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"6", " ", "myyI", " ", "rhoI"}], 
+     RowBox[{"5", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", "mxyI", " ", "rhoI"}], "\[Rho]"]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   Rational[-6, 25] (-5 + 
+     3 $CellContext`myyI (-1 + $CellContext`omega)) $CellContext`rhoI, 
+   ";\t", $CellContext`mxx -> 
+   Rational[1, 6] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`mxxI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`myy -> 
+   Rational[6, 5] $CellContext`myyI $CellContext`rhoI/$CellContext`\[Rho], 
+   ";\t", $CellContext`mxy -> 
+   2 $CellContext`mxyI $CellContext`rhoI/$CellContext`\[Rho], ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202845188*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"f7f33e2a-8d5b-4468-b100-435a8aaedc15"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"north\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["north", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202846409*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"990f5377-dcf5-4f52-a72f-ad4cf2bca985"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["uo", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "5", ",", "6"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "3", ",", "4", ",", "7", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[$CellContext`uo, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 1, 2, 3, 5, 6}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 3, 4, 7, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028475733`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"323ed2cc-82da-491d-9152-fe2faf50f1c8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[1] + $CellContext`pop[
+     2] + $CellContext`pop[3] + $CellContext`pop[5] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202850297*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"6e7769c2-f373-4983-8a10-b9a4e1e0fe19"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028512297`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"190175a9-ed3e-44dd-bcec-c8d303b7a228"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[1] + $CellContext`pop[3] + $CellContext`pop[
+     5] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028520727`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"35f9c297-3bf6-43ba-a697-1683572fbce7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "2", "]"}], "+", 
+     RowBox[{"pop", "[", "5", "]"}], "+", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[2] + $CellContext`pop[5] + $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028532124`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"8319408b-74b6-4b92-8b20-cf313e9056ee"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "5", "]"}], "-", 
+     RowBox[{"pop", "[", "6", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[$CellContext`pop[5] - $CellContext`pop[6], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202854342*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"b50d4935-cd2e-4052-8b2b-6b3938a72a93"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    FractionBox[
+     RowBox[{"3", " ", 
+      RowBox[{"(", 
+       RowBox[{"4", "-", 
+        RowBox[{"3", " ", "myyI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}]}], ")"}], " ", 
+      "rhoI"}], 
+     RowBox[{"9", "+", "omega"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{"6", " ", "mxxI", " ", "rhoI"}], 
+     RowBox[{"5", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"9", " ", "myyI", " ", "rhoI"}], "+", "\[Rho]"}], 
+     RowBox[{"6", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"6", " ", "mxyI", " ", "rhoI"}], "-", 
+      RowBox[{"uo", " ", "\[Rho]"}]}], 
+     RowBox[{"3", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   3 (4 - 3 $CellContext`myyI (-1 + $CellContext`omega)) (
+      9 + $CellContext`omega)^(-1) $CellContext`rhoI, ";\t", $CellContext`mxx -> 
+   Rational[6, 5] $CellContext`mxxI $CellContext`rhoI/$CellContext`\[Rho], 
+   ";\t", $CellContext`myy -> 
+   Rational[1, 6] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`myyI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`mxy -> 
+   Rational[1, 3] $CellContext`\[Rho]^(-1) (
+     6 $CellContext`mxyI $CellContext`rhoI - $CellContext`uo $CellContext`\
+\[Rho]), ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028556643`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"c7a5899e-8ddf-4d22-b8a9-f1423458481b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   StyleBox["\<\"------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\"south\"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]], "\[InvisibleSpace]", 
+   StyleBox["\<\" ------------------------------------ \"\>",
+    StripOnInput->False,
+    LineColor->RGBColor[0, 0, 1],
+    FrontFaceColor->RGBColor[0, 0, 1],
+    BackFaceColor->RGBColor[0, 0, 1],
+    GraphicsColor->RGBColor[0, 0, 1],
+    FontSize->14,
+    FontColor->RGBColor[0, 0, 1]]}],
+  SequenceForm[
+   Style["------------------------------------ ", 
+    RGBColor[0, 0, 1], 14], 
+   Style["south", 
+    RGBColor[0, 0, 1], 14], 
+   Style[" ------------------------------------ ", 
+    RGBColor[0, 0, 1], 14]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202856905*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"10aba5a1-a81d-4d08-8d61-2d71449bedf8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TemplateBox[{StyleBox["\"ux = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False],StyleBox[
+     "\";\"", StripOnInput -> False],TemplateBox[{20}, "Spacer1"],StyleBox[
+     "\"uy = \"", StripOnInput -> False],StyleBox["0", 
+      RGBColor[0.2, 0.5, 0.3], StripOnInput -> False]},
+    "RowDefault"], "\[InvisibleSpace]", "\<\";\"\>", "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Is = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "3", ",", "4", ",", "7", ",", "8"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", 
+   TemplateBox[{20},
+    "Spacer1"], "\[InvisibleSpace]", "\<\"Os = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "3", ",", "5", ",", "6"}], "}"}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\";\"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm[
+   Row[{
+     Style["ux = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]], 
+     Style[";"], 
+     Spacer[20], 
+     Style["uy = "], 
+     Style[0, 
+      RGBColor[0.2, 0.5, 0.3]]}], 
+   Style[";"], 
+   Spacer[20], "Is = ", 
+   Style[{0, 1, 3, 4, 7, 8}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], 
+   Spacer[20], "Os = ", 
+   Style[{0, 1, 2, 3, 5, 6}, 
+    RGBColor[0.2, 0.5, 0.3]], 
+   Style[";"], ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202858083*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"e1afa115-4032-489e-9f04-27c3ca7e509b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rhoI = \"\>", "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "0", "]"}], "+", 
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]]}],
+  SequenceForm["rhoI = ", 
+   Style[$CellContext`pop[0] + $CellContext`pop[1] + $CellContext`pop[
+     3] + $CellContext`pop[4] + $CellContext`pop[7] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202861013*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"32c46989-8aa1-410c-abdc-0df96b9398ae"],
+
+Cell[BoxData["\<\"inv_rhoI = 1.0/rhoI \"\>"], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202862013*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"9808eb91-0188-43ad-8667-1ca09c428249"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxxI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "1", "]"}], "+", 
+     RowBox[{"pop", "[", "3", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["mxxI = ", "(", 
+   Style[$CellContext`pop[1] + $CellContext`pop[3] + $CellContext`pop[
+     7] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202863003*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"d1bb0aa2-fcf1-484b-971c-0877cd177080"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "4", "]"}], "+", 
+     RowBox[{"pop", "[", "7", "]"}], "+", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\" - \"\>", "\[InvisibleSpace]", "\<\"cs2\"\>"}],
+  SequenceForm["myyI = ", "(", 
+   Style[$CellContext`pop[4] + $CellContext`pop[7] + $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", " - ", "cs2"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202864142*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"bca18e2e-ae09-4ef0-b2a9-04edad7a3701"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"mxyI = \"\>", "\[InvisibleSpace]", "\<\"(\"\>", 
+   "\[InvisibleSpace]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"pop", "[", "7", "]"}], "-", 
+     RowBox[{"pop", "[", "8", "]"}]}],
+    StripOnInput->False,
+    LineColor->RGBColor[0.2, 0.5, 0.3],
+    FrontFaceColor->RGBColor[0.2, 0.5, 0.3],
+    BackFaceColor->RGBColor[0.2, 0.5, 0.3],
+    GraphicsColor->RGBColor[0.2, 0.5, 0.3],
+    FontColor->RGBColor[0.2, 0.5, 0.3]], "\[InvisibleSpace]", "\<\")\"\>", 
+   "\[InvisibleSpace]", "\<\"*\"\>", 
+   "\[InvisibleSpace]", "\<\" inv_rhoI \"\>", 
+   "\[InvisibleSpace]", "\<\";\\n\"\>"}],
+  SequenceForm["mxyI = ", "(", 
+   Style[$CellContext`pop[7] - $CellContext`pop[8], 
+    RGBColor[0.2, 0.5, 0.3]], ")", "*", " inv_rhoI ", ";\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.9623652028652077`*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"1d828fed-5551-4aaf-895c-2c8427c64f4e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"\[Rho]", "\[Rule]", 
+    FractionBox[
+     RowBox[{"3", " ", 
+      RowBox[{"(", 
+       RowBox[{"4", "-", 
+        RowBox[{"3", " ", "myyI", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "omega"}], ")"}]}]}], ")"}], " ", 
+      "rhoI"}], 
+     RowBox[{"9", "+", "omega"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxx", "\[Rule]", 
+    FractionBox[
+     RowBox[{"6", " ", "mxxI", " ", "rhoI"}], 
+     RowBox[{"5", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"myy", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"9", " ", "myyI", " ", "rhoI"}], "+", "\[Rho]"}], 
+     RowBox[{"6", " ", "\[Rho]"}]]}], "\[InvisibleSpace]", "\<\";\\t\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"mxy", "\[Rule]", 
+    FractionBox[
+     RowBox[{"2", " ", "mxyI", " ", "rhoI"}], "\[Rho]"]}], 
+   "\[InvisibleSpace]", "\<\";\\n\\n\"\>"}],
+  SequenceForm[$CellContext`\[Rho] -> 
+   3 (4 - 3 $CellContext`myyI (-1 + $CellContext`omega)) (
+      9 + $CellContext`omega)^(-1) $CellContext`rhoI, ";\t", $CellContext`mxx -> 
+   Rational[6, 5] $CellContext`mxxI $CellContext`rhoI/$CellContext`\[Rho], 
+   ";\t", $CellContext`myy -> 
+   Rational[1, 6] $CellContext`\[Rho]^(-1) (
+     9 $CellContext`myyI $CellContext`rhoI + $CellContext`\[Rho]), 
+   ";\t", $CellContext`mxy -> 
+   2 $CellContext`mxyI $CellContext`rhoI/$CellContext`\[Rho], ";\n\n"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.9623644561856327`*^9, 3.962364460050112*^9}, {
+   3.962364509849123*^9, 3.9623645585671043`*^9}, 3.9623645892709427`*^9, 
+   3.9623646638469*^9, 3.962364700228498*^9, 3.962364783361136*^9, {
+   3.962364830137602*^9, 3.962364909921071*^9}, {3.962365015253263*^9, 
+   3.9623650428457527`*^9}, 3.962365109002513*^9, 3.962365202866418*^9},
+ CellLabel->
+  "During evaluation of \
+In[221]:=",ExpressionUUID->"93a0ab5d-4629-4e5b-8bec-843b0f164bef"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{
+  3.9623640053676767`*^9},ExpressionUUID->"c26e3a23-56bb-4b68-9619-\
+2e0e92fa709e"]
+},
+WindowSize->{1854, 1003},
+WindowMargins->{{Automatic, 0}, {0, Automatic}},
+Magnification:>1.3 Inherited,
+FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 20218, 615, 3307, "Input",ExpressionUUID->"f8165cde-f27e-4cf6-8450-44755db2d1d2"],
+Cell[CellGroupData[{
+Cell[20823, 641, 1654, 42, 32, "Print",ExpressionUUID->"9efc7947-5bf7-436f-8279-86f87aed87f0"],
+Cell[22480, 685, 2346, 60, 61, "Print",ExpressionUUID->"20fb575d-bfb8-4e65-94af-68ad41bb9eba"],
+Cell[24829, 747, 1174, 27, 32, "Print",ExpressionUUID->"3a7db09e-f303-46a8-be97-6e61933b7935"],
+Cell[26006, 776, 518, 8, 32, "Print",ExpressionUUID->"2044c589-d35b-45f4-894f-b93d6e14c39c"],
+Cell[26527, 786, 1314, 28, 32, "Print",ExpressionUUID->"552cc9d6-5367-4980-aee0-1ed4d4c7fffb"],
+Cell[27844, 816, 1314, 28, 32, "Print",ExpressionUUID->"03757acd-6bb6-42db-9a76-375a2e6a0649"],
+Cell[29161, 846, 1198, 27, 61, "Print",ExpressionUUID->"5eb18a52-f3f3-4cd8-b803-32d080caadb7"],
+Cell[30362, 875, 3242, 77, 168, "Print",ExpressionUUID->"b50e13cc-05b4-4478-a8a6-10484e1bfe14"],
+Cell[33607, 954, 1651, 42, 32, "Print",ExpressionUUID->"515965d1-3316-48a3-bdcb-16bfe9a5f0cc"],
+Cell[35261, 998, 2359, 60, 61, "Print",ExpressionUUID->"b7aa4232-7a87-4e13-9ea3-96d7a2fd4428"],
+Cell[37623, 1060, 1174, 27, 32, "Print",ExpressionUUID->"eba77481-e3dc-47f5-8ac4-b15e27ff835b"],
+Cell[38800, 1089, 518, 8, 32, "Print",ExpressionUUID->"40aceaad-8bda-4dd6-a29a-bab74576a2b8"],
+Cell[39321, 1099, 1314, 28, 32, "Print",ExpressionUUID->"bf351fcf-b21b-4920-96da-9ecb009bc7f0"],
+Cell[40638, 1129, 1316, 28, 32, "Print",ExpressionUUID->"ea0b0a3e-a400-4831-a440-c0c2efd5cc9e"],
+Cell[41957, 1159, 1215, 27, 61, "Print",ExpressionUUID->"cd5da1dc-5188-488c-9fbc-ef15172df28e"],
+Cell[43175, 1188, 3918, 94, 174, "Print",ExpressionUUID->"bf592945-68a0-4290-b201-386f8004957f"],
+Cell[47096, 1284, 1652, 42, 32, "Print",ExpressionUUID->"097fa9f8-8868-4cbd-91ef-317b41891b97"],
+Cell[48751, 1328, 2343, 60, 61, "Print",ExpressionUUID->"b360f01f-dc47-43e7-b538-dbba7c930b3d"],
+Cell[51097, 1390, 1173, 27, 32, "Print",ExpressionUUID->"d8621c15-83ca-4339-82bf-4573f0d237ee"],
+Cell[52273, 1419, 518, 8, 32, "Print",ExpressionUUID->"bc847e7e-e3f9-4e25-bedd-421ffcf3cd1c"],
+Cell[52794, 1429, 1314, 28, 32, "Print",ExpressionUUID->"dc790c27-1d8f-4ed4-b97d-6a18d16cf6d4"],
+Cell[54111, 1459, 1314, 28, 32, "Print",ExpressionUUID->"6c89091e-bfb7-4721-aacc-2000b39bc093"],
+Cell[55428, 1489, 1213, 27, 61, "Print",ExpressionUUID->"8dc94562-257a-46d2-81f4-569661d3ee69"],
+Cell[56644, 1518, 3247, 78, 168, "Print",ExpressionUUID->"6afb00de-f1fe-4387-9eb3-f02344ad7426"],
+Cell[59894, 1598, 1652, 42, 32, "Print",ExpressionUUID->"8ad5cadc-749c-41bd-99e3-57e6007d0188"],
+Cell[61549, 1642, 2359, 60, 61, "Print",ExpressionUUID->"43516c92-2ba4-467c-a27b-e3eab3e39d8a"],
+Cell[63911, 1704, 1174, 27, 32, "Print",ExpressionUUID->"09fa226b-8b21-470f-b5bd-9209649c154e"],
+Cell[65088, 1733, 518, 8, 32, "Print",ExpressionUUID->"21e6396f-5d81-4d00-9e10-c4de281060db"],
+Cell[65609, 1743, 1316, 28, 32, "Print",ExpressionUUID->"9f7d7e61-afa4-4a0e-8486-8573b4c1583c"],
+Cell[66928, 1773, 1314, 28, 32, "Print",ExpressionUUID->"adcfbfe2-afbb-4cf9-8a2a-221abe498371"],
+Cell[68245, 1803, 1198, 27, 61, "Print",ExpressionUUID->"9cc15c3b-e8e1-40de-9b70-30d4a3418af7"],
+Cell[69446, 1832, 3914, 94, 174, "Print",ExpressionUUID->"38759cda-10d6-4cfd-a24f-377d21f97d88"],
+Cell[73363, 1928, 1642, 42, 32, "Print",ExpressionUUID->"6d2e9cc8-ed8e-4e4f-8c65-7c6ac97974c5"],
+Cell[75008, 1972, 2396, 60, 61, "Print",ExpressionUUID->"89fde77f-b182-448a-bb3a-7fee6de3bb49"],
+Cell[77407, 2034, 1306, 29, 32, "Print",ExpressionUUID->"13d03462-2aae-47d8-b1ec-5a6fe79e2e1e"],
+Cell[78716, 2065, 518, 8, 32, "Print",ExpressionUUID->"8bf84376-895e-49ce-802c-36cde3d1bf24"],
+Cell[79237, 2075, 1381, 29, 32, "Print",ExpressionUUID->"00063fa2-e96b-40de-b7a7-d60fb4d06544"],
+Cell[80621, 2106, 1452, 31, 32, "Print",ExpressionUUID->"42aec1a0-3fca-438a-afdf-8248d8931a61"],
+Cell[82076, 2139, 1297, 29, 61, "Print",ExpressionUUID->"60389737-7913-4edd-bc60-9ba58468c77a"],
+Cell[83376, 2170, 2003, 47, 116, "Print",ExpressionUUID->"acf1f15c-eb9c-4de5-96b2-5c8bbee66f4a"],
+Cell[85382, 2219, 1640, 42, 32, "Print",ExpressionUUID->"3bf45d9d-01b5-4695-b157-f89969eb9e0b"],
+Cell[87025, 2263, 2396, 60, 61, "Print",ExpressionUUID->"95ccb15c-eeaf-4933-822b-aa0154c70281"],
+Cell[89424, 2325, 1303, 29, 32, "Print",ExpressionUUID->"d5ad28b4-fda1-4b29-acc5-0cca8119b50a"],
+Cell[90730, 2356, 518, 8, 32, "Print",ExpressionUUID->"cd5d4943-bb02-4d2d-8b36-b7041f0ae25a"],
+Cell[91251, 2366, 1381, 29, 32, "Print",ExpressionUUID->"dca35717-1dce-4f1d-a511-ebcc725cd5ac"],
+Cell[92635, 2397, 1450, 31, 32, "Print",ExpressionUUID->"47a8cd15-172a-4ff6-91f4-61a31f00c7ae"],
+Cell[94088, 2430, 1272, 28, 61, "Print",ExpressionUUID->"df94b814-98cd-498d-a6b1-286fda66eec3"],
+Cell[95363, 2460, 1999, 48, 113, "Print",ExpressionUUID->"f7f33e2a-8d5b-4468-b100-435a8aaedc15"],
+Cell[97365, 2510, 1642, 42, 32, "Print",ExpressionUUID->"990f5377-dcf5-4f52-a72f-ad4cf2bca985"],
+Cell[99010, 2554, 2413, 60, 61, "Print",ExpressionUUID->"323ed2cc-82da-491d-9152-fe2faf50f1c8"],
+Cell[101426, 2616, 1304, 29, 32, "Print",ExpressionUUID->"6e7769c2-f373-4983-8a10-b9a4e1e0fe19"],
+Cell[102733, 2647, 520, 8, 32, "Print",ExpressionUUID->"190175a9-ed3e-44dd-bcec-c8d303b7a228"],
+Cell[103256, 2657, 1452, 31, 32, "Print",ExpressionUUID->"35f9c297-3bf6-43ba-a697-1683572fbce7"],
+Cell[104711, 2690, 1381, 29, 32, "Print",ExpressionUUID->"8319408b-74b6-4b92-8b20-cf313e9056ee"],
+Cell[106095, 2721, 1272, 28, 61, "Print",ExpressionUUID->"b50d4935-cd2e-4052-8b2b-6b3938a72a93"],
+Cell[107370, 2751, 2157, 51, 116, "Print",ExpressionUUID->"c7a5899e-8ddf-4d22-b8a9-f1423458481b"],
+Cell[109530, 2804, 1642, 42, 32, "Print",ExpressionUUID->"10aba5a1-a81d-4d08-8d61-2d71449bedf8"],
+Cell[111175, 2848, 2396, 60, 61, "Print",ExpressionUUID->"e1afa115-4032-489e-9f04-27c3ca7e509b"],
+Cell[113574, 2910, 1304, 29, 32, "Print",ExpressionUUID->"32c46989-8aa1-410c-abdc-0df96b9398ae"],
+Cell[114881, 2941, 518, 8, 32, "Print",ExpressionUUID->"9808eb91-0188-43ad-8667-1ca09c428249"],
+Cell[115402, 2951, 1450, 31, 32, "Print",ExpressionUUID->"d1bb0aa2-fcf1-484b-971c-0877cd177080"],
+Cell[116855, 2984, 1379, 29, 32, "Print",ExpressionUUID->"bca18e2e-ae09-4ef0-b2a9-04edad7a3701"],
+Cell[118237, 3015, 1274, 28, 61, "Print",ExpressionUUID->"1d828fed-5551-4aaf-895c-2c8427c64f4e"],
+Cell[119514, 3045, 2005, 47, 116, "Print",ExpressionUUID->"93a0ab5d-4629-4e5b-8bec-843b0f164bef"]
+}, Open  ]]
+}, Open  ]],
+Cell[121546, 3096, 149, 3, 75, "Input",ExpressionUUID->"c26e3a23-56bb-4b68-9619-2e0e92fa709e"]
+}
+]
+*)
+
