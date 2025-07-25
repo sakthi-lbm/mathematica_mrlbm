@@ -19,6 +19,6 @@ PrintBoundaryResults[] := (
   Print["myyI = " ,"(",Style[MyyIn, RGBColor[0.2, 0.5, 0.3]],")","*"," inv_rhoI "," - ","cs2"];
   Print["mxyI = " ,"(",Style[MxyIn, RGBColor[0.2, 0.5, 0.3]],")","*"," inv_rhoI ", ";\n"];
 	
-  Print[Simplify[sol1[[1, 1]]], ";\t", sol2[[1, 1]], ";\t", 
-    sol2[[1, 2]], ";\t", sol2[[1, 3]], ";\n\n"];
+  Print[Simplify[sol1[[1, 1]]], ";\n", sol2[[1, 1]], ";",Spacer[20], 
+    sol2[[1, 2]], ";",Spacer[20], sol2[[1, 3]], ";\n\n"];
 )
