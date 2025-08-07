@@ -1,0 +1,5 @@
+ρ -> ((4 + 3*mxxI)*rhoI)/(3*(1 + ux));
+mxx -> (9*mxxI*rhoI + ρ - 3*ux*ρ)/(6*ρ);
+myy -> (6*myyI*rhoI)/(5*ρ);
+mxy -> (6*mxyI*rhoI - uy*ρ)/(3*ρ);
+

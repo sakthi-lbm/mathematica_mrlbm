@@ -1,5 +1,0 @@
-ρ -> (-3*(48*rhoI + 24*mxxI*rhoI - 162*mxyI*rhoI + 30*myyI*rhoI + 84*mxxI*omega*rhoI + 273*mxyI*omega*rhoI - 57*myyI*omega*rhoI + 66*rhoI*uxI - 255*omega*rhoI*uxI + 12*rhoI*uyI + 12*omega*rhoI*uyI + Sqrt[3]*Sqrt[rhoI^2*(3*(16 + 10*myyI - 19*myyI*omega + 4*mxxI*(2 + 7*omega) + mxyI*(-54 + 91*omega) + 22*uxI - 85*omega*uxI + 4*uyI + 4*omega*uyI)^2 - 4*omega*(-30 + 7*omega)*(112*mxxI^2 + 149*mxyI^2 + 7*myyI^2 + 98*myyI*uxI + 343*uxI^2 - 6*myyI*uyI - 42*uxI*uyI + 4*uyI^2 + 8*mxxI*(32*mxyI - 7*myyI - 49*uxI + 3*uyI) + mxyI*(-64*myyI - 448*uxI + 22*uyI)))]))/(8*(-30 + 7*omega));
-ux -> -(12*mxxI*rhoI + 15*mxyI*rhoI - 3*myyI*rhoI - 21*rhoI*uxI + 4*ρ)/(4*ρ);
-uy -> (3*rhoI*(-mxyI + uyI))/(2*ρ);
-mxx -> (9*mxxI*rhoI - 6*rhoI*uxI + 2*ρ)/(3*ρ);
-

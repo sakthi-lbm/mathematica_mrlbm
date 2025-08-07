@@ -1,0 +1,5 @@
+ρ -> (-12*(-1 + 3*mxxI*(-1 + omega) - 3*mxyI*(-1 + omega))*rhoI)/(7*omega);
+mxx -> -(-12*mxxI*rhoI + 6*mxyI*rhoI + 3*myyI*rhoI - 2*ρ)/(3*ρ);
+myy -> -(2*mxxI*rhoI + 2*mxyI*rhoI - 5*myyI*rhoI)/(2*ρ);
+mxy -> -(6*mxxI*rhoI - 30*mxyI*rhoI + 3*myyI*rhoI + 2*ρ)/(6*ρ);
+

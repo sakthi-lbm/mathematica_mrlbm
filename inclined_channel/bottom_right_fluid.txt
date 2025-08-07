@@ -1,5 +1,0 @@
-ρ -> -(6*rhoI + 9*mxxI*omega*rhoI + 6*rhoI*uxI - 18*omega*rhoI*uxI + Sqrt[3]*Sqrt[rhoI^2*(-4*(-6 + omega)*omega*(3*mxxI - 4*uxI)^2 + 3*(2 + 3*mxxI*omega + (2 - 6*omega)*uxI)^2)])/(2*(-6 + omega));
-ux -> -((3*mxxI*rhoI - 4*rhoI*uxI + ρ)/ρ);
-uy -> (3*rhoI*(-mxyI + uyI))/(2*ρ);
-mxx -> (9*mxxI*rhoI - 6*rhoI*uxI + 2*ρ)/(3*ρ);
-
