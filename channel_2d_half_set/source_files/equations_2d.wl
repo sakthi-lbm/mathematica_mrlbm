@@ -13,4 +13,3 @@ equyW = Simplify[Total[f[Is + 1] * cy[[Is + 1]]]] - rhoI*uyI == 0;
 eqmxx  = Simplify[Total[f[Is + 1] * Hxx[Is + 1]]] - rhoI*mxxI == 0;
 eqmyy  = Simplify[Total[f[Is + 1] * Hyy[Is + 1]]] - rhoI*myyI == 0;
 eqmxy  = Simplify[Total[f[Is + 1] * Hxy[Is + 1]]] - rhoI*mxyI == 0;
-eqinc = mxx + myy - (ux*ux) - (uy*uy) == 0;

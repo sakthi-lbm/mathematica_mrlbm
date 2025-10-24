@@ -1,0 +1,6 @@
+ρ -> (10*rhoI + 6*myyI*omega*rhoI - 10*rhoI*uxI - Sqrt[2]*Sqrt[rhoI^2*(2*(5 + 3*myyI*omega - 5*uxI)^2 - 225*omega*(mxyI + uyI)^2)])/20;
+ux -> (15*ρ^2 - Sqrt[15]*Sqrt[-135*mxyI^2*rhoI^2*ρ^2 - 270*mxyI*rhoI^2*uyI*ρ^2 - 135*rhoI^2*uyI^2*ρ^2 + 72*myyI*rhoI*ρ^3 - 120*rhoI*uxI*ρ^3 - 5*ρ^4])/(30*ρ^2);
+uy -> (3*(mxyI*rhoI + rhoI*uyI))/(2*ρ);
+mxx -> (-60*rhoI*uxI + 5*ρ - (Sqrt[15]*Sqrt[-(ρ^2*(135*mxyI^2*rhoI^2 + 270*mxyI*rhoI^2*uyI + 135*rhoI^2*uyI^2 - 72*myyI*rhoI*ρ + 120*rhoI*uxI*ρ + 5*ρ^2))])/ρ)/(30*ρ);
+myy -> (6*myyI*rhoI)/(5*ρ);
+mxy -> (rhoI*(5*mxyI + uyI))/(2*ρ);

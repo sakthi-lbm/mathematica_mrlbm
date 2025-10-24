@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<VTKFile type="Collection" version="0.1">
+  <Collection>
+    <DataSet part="0" file="coarse_grid.vts"/>
+    <DataSet part="1" file="fine_grid.vts"/>
+  </Collection>
+</VTKFile>

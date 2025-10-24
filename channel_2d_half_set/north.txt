@@ -1,0 +1,5 @@
+ρ -> (12*(-3 - 3*myyI + 3*mxxI*(-1 + omega) - 7*mxyI*(-1 + omega) + 3*myyI*omega)*rhoI)/(2*(-8 + 7*ux + 7*uy) + omega*(-9 + ux + 15*ux^2 + uy - 9*ux*uy + 15*uy^2));
+mxx -> (-2*(-9*mxxI*rhoI + 6*mxyI*rhoI - ρ + 2*ux*ρ - uy*ρ))/(9*ρ);
+myy -> (2*(-6*mxyI*rhoI + 9*myyI*rhoI + ρ + ux*ρ - 2*uy*ρ))/(9*ρ);
+mxy -> -(18*mxxI*rhoI - 132*mxyI*rhoI + 18*myyI*rhoI + 7*ρ + 7*ux*ρ + 7*uy*ρ)/(27*ρ);
+
